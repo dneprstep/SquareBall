@@ -3,27 +3,28 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
-	GameObject playerPos;
-	Vector3 offset;
-	// Use this for initialization
+	public Transform lookAtObject;
+
+	private GameObject playerPos;
+	private Vector3 offset;
+
+
 	void Start () {
 
 		playerPos = GameObject.FindWithTag ("Player");
-		offset = new Vector3 (5, 8, -4);
-//		offset.transform.rotation.Set(30, 350,0,1);
+		offset = new Vector3 (3, 8, -4);
 
-		this.transform.rotation.Set (50, 350, 0, 1);
-
+//		lookAtObject = GameObject.FindWithTag ("Player").GetComponent<Transform> ();
+		this.transform.position = lookAtObject.position + offset;
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 	}
 	void LateUpdate()
 	{
-		this.transform.position = offset + playerPos.transform.position;
-
-
-
+		this.transform.position = lookAtObject.position + offset;
+		this.transform.LookAt (lookAtObject);
 	}
+
 }
